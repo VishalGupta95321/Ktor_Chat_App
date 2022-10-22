@@ -1,6 +1,5 @@
 package com.example.ktor_chat_app.screen_chat.presentation
 
-import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -20,7 +19,11 @@ fun ChatScreen(
     val contactData = viewModel.contactInfo.value
     val text = viewModel.textFieldValue.value
 
-    Log.d("kkkkk",";;;;")
+    viewModel.onEvent(
+        ChatEvents.UpdateContactId(
+            sendToId
+        )
+    )
 
     Scaffold(
         topBar = {
@@ -45,8 +48,7 @@ fun ChatScreen(
                 )
             }
         }
-
-            },
+                  },
         bottomBar = {
             SendTextField(
                 label = text.label,

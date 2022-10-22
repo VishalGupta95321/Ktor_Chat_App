@@ -31,6 +31,8 @@ class ChatViewModel @Inject constructor(
 
     private var myId : String? = null
 
+    private var contactId: String? = null
+
     private val _contactInfo  = mutableStateOf(
         ContactInfoState(
         onlineStatus = "coming soon"
@@ -93,13 +95,21 @@ class ChatViewModel @Inject constructor(
                     isnDelUpdChatUseCases.messageDeleteUpdate(events.messageId)
                 }
             }
+
+            is ChatEvents.UpdateContactId ->{
+                contactId.isNullOrEmpty().let {
+                    contactId = events.contactId
+                    retrieveAllChats(events.contactId)
+                    retrieveContact(events.contactId)
+                }
+            }
         }
     }
 
-     private fun retrieveAllChats(roomId:String) {
+    private fun retrieveAllChats(roomId:String) {
         viewModelScope.launch {
             retrieveChatUseCases.retrieveAllChatsByRoom(roomId).collect { chatMessages ->
-                //todo "here we are not using extension function that convert chatMessageEntity to CharMessage because of some unknown error "
+                //todo " here we are not using extension function that convert chatMessageEntity to CharMessage because of some unknown error "
                 _chatList.value = chatMessages.map {
                     ChatState(
                         messageSeen = it.messageSeen,
@@ -116,7 +126,7 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-     private fun retrieveContact(contactId:String){
+    private fun retrieveContact(contactId:String){
         viewModelScope.launch{
             contactUseCases.getContactWithId(contactId).collect{ contact->
                 _contactInfo.value = _contactInfo.value.copy(
@@ -132,11 +142,8 @@ class ChatViewModel @Inject constructor(
         }
     }
 
+
     init {
-//        retrieveContact("+919682824770")
-//        retrieveAllChats("+919682824770")
-        retrieveContact("+919532169104")
-        retrieveAllChats("+919532169104")
         myId()
     }
 }

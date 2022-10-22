@@ -59,7 +59,8 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             database.chatDao().updateUserActiveStatus(userId = "+919532169104")
             Log.d("kkkkk","got it")
-            dataStore.saveUser("+918303168968")
+            dataStore.saveUser("+919682824770")
+
             //dataStore.saveUser("+919532169104")
             Toast.makeText(this@MainActivity,dataStore.clientId(),Toast.LENGTH_LONG).show()
             delay(2000L)

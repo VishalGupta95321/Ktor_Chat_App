@@ -15,4 +15,6 @@ sealed class ChatEvents {
         ): ChatEvents()
 
     data class UpdateDeleted(val messageId: String): ChatEvents()
+
+    data class UpdateContactId(val contactId: String): ChatEvents()
 }
