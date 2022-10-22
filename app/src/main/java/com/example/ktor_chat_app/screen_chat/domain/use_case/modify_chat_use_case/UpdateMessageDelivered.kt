@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.chat_screen.use_cases.modify_chat_use_cases
+package com.example.ktor_chat_app.screen_chat.domain.use_case.modify_chat_use_case
 
 import com.example.ktor_chat_app.screen_chat.domain.repository.ChatRepository
 import javax.inject.Inject

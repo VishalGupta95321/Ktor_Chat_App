@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.chat_screen.use_cases.retrieve_chat_use_cases
+package com.example.ktor_chat_app.screen_chat.domain.use_case.retrieve_chat_use_case
 
 data class RetrieveChatUseCases(
     val retrieveAllChatsByRoom: RetrieveAllChatsByRoom,

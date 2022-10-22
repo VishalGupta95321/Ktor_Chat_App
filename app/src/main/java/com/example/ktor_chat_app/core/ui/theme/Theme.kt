@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.ui.theme
+package com.example.ktor_chat_app.core.ui.theme
 
 import android.app.Activity
 import android.os.Build

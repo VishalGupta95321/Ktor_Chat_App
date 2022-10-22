@@ -1,9 +1,9 @@
-package com.example.ktor_chat_app.presentation.login_signup_screen
+package com.example.ktor_chat_app.screen_auth.presentation
 
 import android.app.Activity
 
 sealed class LoginSignUpEvents {
-    object SignOut:LoginSignUpEvents()
+    object SignOut: LoginSignUpEvents()
     data class EnteredNameEvent(val value : String) : LoginSignUpEvents()
     data class EnteredPhoneNoEvent(val value: String) : LoginSignUpEvents()
     data class GenerateOtpEvent(val activity: Activity): LoginSignUpEvents()

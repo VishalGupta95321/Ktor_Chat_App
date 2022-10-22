@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.domain.use_cases.loginUseCases
+package com.example.ktor_chat_app.screen_auth.domain.use_case
 
 data class AuthUseCases(
     val signOut : SignOut,

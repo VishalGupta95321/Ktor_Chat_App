@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.ContactsScreen.navGraph
+package com.example.ktor_chat_app.navgraph
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -6,10 +6,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.ktor_chat_app.presentation.ChatScreen.ChatScreen
-import com.example.ktor_chat_app.presentation.ContactsScreen.composables.AddContactScreen
-import com.example.ktor_chat_app.presentation.ContactsScreen.composables.HomeContactScreen
-import com.example.ktor_chat_app.presentation.Graph
+import com.example.ktor_chat_app.screen_chat.presentation.ChatScreen
+import com.example.ktor_chat_app.presentation.contacts_screen.composables.AddContactScreen
+import com.example.ktor_chat_app.presentation.contacts_screen.composables.HomeContactScreen
 
 
 @Composable

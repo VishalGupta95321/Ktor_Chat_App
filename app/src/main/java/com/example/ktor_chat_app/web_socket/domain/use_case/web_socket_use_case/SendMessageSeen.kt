@@ -1,11 +1,11 @@
-package com.example.ktor_chat_app.main.webSocketUseCases
+package com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case
 
 import com.example.ktor_chat_app.data.remote.model.MessageSeen
-import com.example.ktor_chat_app.main.AppRepository
+import com.example.ktor_chat_app.web_socket.domain.repository.WebSocketRepository
 import javax.inject.Inject
 
 class SendMessageSeen @Inject constructor(
-    private val repository: AppRepository
+    private val repository: WebSocketRepository
 ) {
 
     suspend operator fun invoke(

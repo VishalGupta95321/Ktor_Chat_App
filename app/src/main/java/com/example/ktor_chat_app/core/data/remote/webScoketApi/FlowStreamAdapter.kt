@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.data.remote.webScoketApi
+package com.example.ktor_chat_app.core.data.remote.webScoketApi
 
 import com.tinder.scarlet.Stream
 import com.tinder.scarlet.StreamAdapter

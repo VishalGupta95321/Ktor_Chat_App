@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.login_signup_screen
+package com.example.ktor_chat_app.screen_auth.domain.repository
 
 import com.example.ktor_chat_app.data.remote.model.RegisterUserRequest
 import com.example.ktor_chat_app.data.repository.AuthResponse

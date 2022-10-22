@@ -1,13 +1,14 @@
-package com.example.ktor_chat_app.presentation.contacts_screen
+package com.example.ktor_chat_app.screen_contact.data.repository
 
 import com.example.ktor_chat_app.data.local.ChatDao
 import com.example.ktor_chat_app.data.local.entity.UserEntity
+import com.example.ktor_chat_app.screen_contact.domain.repository.ContactRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ContactRepositoryImpl @Inject constructor(
     private val database:ChatDao
-) : ContactsRepository {
+) : ContactRepository {
 
     override suspend fun insertContactToDatabase(contact: UserEntity) {
         return database.insertContact(contact)

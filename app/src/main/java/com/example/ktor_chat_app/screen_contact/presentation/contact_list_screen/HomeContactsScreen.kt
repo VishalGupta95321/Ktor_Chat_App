@@ -15,11 +15,11 @@ import androidx.compose.ui.res.vectorResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.ktor_chat_app.R
-import com.example.ktor_chat_app.screen_home.presentation.contact_list_screen.HomeContactsViewModel
-import com.example.ktor_chat_app.screen_home.presentation.components.AddContactFloatingButton
-import com.example.ktor_chat_app.screen_home.presentation.components.HomeListItem
-import com.example.ktor_chat_app.screen_home.presentation.components.HomeTopAppBar
-import com.example.ktor_chat_app.utility.Constants.HOME_APP_BAR_TITLE
+import com.example.ktor_chat_app.screen_contact.presentation.contact_list_screen.HomeContactsViewModel
+import com.example.ktor_chat_app.screen_contact.presentation.components.AddContactFloatingButton
+import com.example.ktor_chat_app.screen_contact.presentation.components.HomeListItem
+import com.example.ktor_chat_app.screen_contact.presentation.components.HomeTopAppBar
+import com.example.ktor_chat_app.core.utility.Constants.HOME_APP_BAR_TITLE
 
 
 @OptIn(ExperimentalMaterial3Api::class)

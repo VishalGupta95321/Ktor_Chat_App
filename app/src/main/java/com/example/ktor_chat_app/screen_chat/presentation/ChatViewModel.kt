@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.chat_screen
+package com.example.ktor_chat_app.screen_chat.presentation
 
 
 import androidx.compose.runtime.State
@@ -7,13 +7,13 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ktor_chat_app.domain.use_cases.webSocketUseCases.WebSocketUseCases
+import com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case.WebSocketUseCases
 import com.example.ktor_chat_app.screen_chat.domain.use_case.modify_chat_use_case.ModifyChatUseCases
 import com.example.ktor_chat_app.screen_chat.domain.use_case.retrieve_chat_use_case.RetrieveChatUseCases
 import com.example.ktor_chat_app.screen_contact.domain.use_case.ContactUseCases
-import com.example.ktor_chat_app.utility.DispatcherProvider
-import com.example.ktor_chat_app.utility.clientId
-import com.example.ktor_chat_app.utility.dateFormat
+import com.example.ktor_chat_app.core.utility.DispatcherProvider
+import com.example.ktor_chat_app.core.utility.clientId
+import com.example.ktor_chat_app.core.utility.dateFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
@@ -31,14 +31,18 @@ class ChatViewModel @Inject constructor(
 
     private var myId : String? = null
 
-    private val _contactData  = mutableStateOf(ContactDataState(
+    private val _contactInfo  = mutableStateOf(
+        ContactInfoState(
         onlineStatus = "coming soon"
-    ))
-    val contactData : State<ContactDataState> = _contactData
+    )
+    )
+    val contactInfo : State<ContactInfoState> = _contactInfo
 
-    private val _textFieldValue = mutableStateOf(ChatTextFieldState(
+    private val _textFieldValue = mutableStateOf(
+        ChatTextFieldState(
         label = "Your Message"
-    ))
+    )
+    )
     val textFieldValue : State<ChatTextFieldState> = _textFieldValue
 
     private val _chatList = mutableStateOf(listOf(ChatState()))
@@ -114,7 +118,7 @@ class ChatViewModel @Inject constructor(
      private fun retrieveContact(contactId:String){
         viewModelScope.launch{
             contactUseCases.getContactWithId(contactId).collect{ contact->
-                _contactData.value = _contactData.value.copy(
+                _contactInfo.value = _contactInfo.value.copy(
                     name = contact.name,
                 )
             }

@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.utility
+package com.example.ktor_chat_app.core.utility
 
 import kotlinx.coroutines.CoroutineDispatcher
 

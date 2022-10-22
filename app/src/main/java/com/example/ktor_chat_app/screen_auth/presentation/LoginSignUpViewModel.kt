@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.login_signup_screen
+package com.example.ktor_chat_app.screen_auth.presentation
 
 import android.app.Activity
 import androidx.compose.runtime.State
@@ -11,9 +11,9 @@ import com.example.ktor_chat_app.data.remote.model.InvalidRequestException
 import com.example.ktor_chat_app.data.remote.model.RegisterUserRequest
 import com.example.ktor_chat_app.data.repository.AuthResponse
 import com.example.ktor_chat_app.screen_auth.domain.use_case.AuthUseCases
-import com.example.ktor_chat_app.utility.Constants.INDIA_TELECOM_PREFIX
-import com.example.ktor_chat_app.utility.Constants.MAX_PHONE_NO_LENGTH
-import com.example.ktor_chat_app.utility.dataStore
+import com.example.ktor_chat_app.core.utility.Constants.INDIA_TELECOM_PREFIX
+import com.example.ktor_chat_app.core.utility.Constants.MAX_PHONE_NO_LENGTH
+import com.example.ktor_chat_app.core.utility.dataStore
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
@@ -33,21 +33,27 @@ class LoginSignUpViewModel @Inject constructor(
     private val authUseCases: AuthUseCases,
     ): ViewModel(){
 
-    private val _name = mutableStateOf(TextFieldState(
+    private val _name = mutableStateOf(
+        TextFieldState(
         label = "Your Name"
-    ))
+    )
+    )
     val name : State<TextFieldState> = _name
 
-    private val _contact = mutableStateOf(TextFieldState(
+    private val _contact = mutableStateOf(
+        TextFieldState(
         text = INDIA_TELECOM_PREFIX,
         label = "Your Contact no."
-    ))
+    )
+    )
     val  contact : State<TextFieldState> = _contact
 
 
-    private val _smsCode = mutableStateOf(TextFieldState(
+    private val _smsCode = mutableStateOf(
+        TextFieldState(
         label = "Enter Your Otp.."
-    ))
+    )
+    )
     val  smsCode : State<TextFieldState> = _smsCode
 
 
@@ -58,7 +64,7 @@ class LoginSignUpViewModel @Inject constructor(
     private var verificationID : String? = null
     private var datastore:DataStore<Preferences>? = null
 
-    fun onEvent(event:LoginSignUpEvents){
+    fun onEvent(event: LoginSignUpEvents){
         when(event){
 
             is LoginSignUpEvents.EnteredNameEvent -> {
@@ -119,7 +125,8 @@ class LoginSignUpViewModel @Inject constructor(
                         _eventFlow.emit(
                             UiEvent.OnError(
                                 message = e.message ?: "Something went wrong"
-                            ))
+                            )
+                        )
                     }
                 }
             }

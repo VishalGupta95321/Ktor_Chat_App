@@ -1,13 +1,13 @@
-package com.example.ktor_chat_app.presentation.login_signup_screen.navGraph
+package com.example.ktor_chat_app.navgraph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.ktor_chat_app.presentation.Graph
-import com.example.ktor_chat_app.presentation.login_signup_screen.LoginSignUpViewModel
 import com.example.ktor_chat_app.presentation.login_signup_screen.OtpVerificationScreen
 import com.example.ktor_chat_app.presentation.login_signup_screen.components.GenerateOtpScreen
+import com.example.ktor_chat_app.screen_auth.presentation.LoginSignUpViewModel
 
 
 fun NavGraphBuilder.authGraph(

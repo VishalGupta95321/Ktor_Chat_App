@@ -1,10 +1,10 @@
-package com.example.ktor_chat_app.main
+package com.example.ktor_chat_app.web_socket.domain.repository
 
 import com.example.ktor_chat_app.data.remote.model.BaseModel
 import com.tinder.scarlet.WebSocket
 import kotlinx.coroutines.flow.Flow
 
-interface AppRepository {
+interface WebSocketRepository {
     suspend fun observeWebSocketConnectionEvents(): Flow<WebSocket.Event>
     suspend fun sendToWebSocket(data: BaseModel)
     suspend fun observeFromWebSocket(): Flow<BaseModel>

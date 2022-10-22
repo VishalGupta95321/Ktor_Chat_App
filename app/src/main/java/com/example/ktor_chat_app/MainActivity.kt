@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.main
+package com.example.ktor_chat_app
 
 import android.os.Build
 import android.os.Bundle
@@ -23,11 +23,11 @@ import com.example.ktor_chat_app.data.local.ChatDatabase
 import com.example.ktor_chat_app.data.remote.model.RegisterUserRequest
 import com.example.ktor_chat_app.data.remote.webScoketApi.ChatApi
 import com.example.ktor_chat_app.navgraph.HomeGraph
-import com.example.ktor_chat_app.presentation.RootNavGraph
-import com.example.ktor_chat_app.ui.theme.Ktor_Chat_AppTheme
-import com.example.ktor_chat_app.utility.clientId
-import com.example.ktor_chat_app.utility.dataStore
-import com.example.ktor_chat_app.utility.saveUser
+import com.example.ktor_chat_app.navgraph.RootNavGraph
+import com.example.ktor_chat_app.core.ui.theme.Ktor_Chat_AppTheme
+import com.example.ktor_chat_app.core.utility.clientId
+import com.example.ktor_chat_app.core.utility.dataStore
+import com.example.ktor_chat_app.core.utility.saveUser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel : AppViewModel by viewModels()
+        val viewModel : MainViewModel by viewModels()
         viewModel.observeBaseModels()
         viewModel.observeConnectionEvent()
 

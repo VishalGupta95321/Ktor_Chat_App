@@ -1,14 +1,14 @@
-package com.example.ktor_chat_app.main.webSocketUseCases
+package com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.example.ktor_chat_app.data.remote.model.ChatMessage
-import com.example.ktor_chat_app.main.AppRepository
-import com.example.ktor_chat_app.utility.clientId
+import com.example.ktor_chat_app.web_socket.domain.repository.WebSocketRepository
+import com.example.ktor_chat_app.core.utility.clientId
 import javax.inject.Inject
 
 class SendChat @Inject constructor(
-    private val repository: AppRepository,
+    private val repository: WebSocketRepository,
     private val dataStore: DataStore<Preferences>
 ){
 

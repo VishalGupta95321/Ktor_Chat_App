@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.data.local.entity
+package com.example.ktor_chat_app.core.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

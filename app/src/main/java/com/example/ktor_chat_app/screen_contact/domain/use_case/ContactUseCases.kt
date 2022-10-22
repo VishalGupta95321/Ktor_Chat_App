@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.contacts_screen.use_cases
+package com.example.ktor_chat_app.screen_contact.domain.use_case
 
 data class ContactUseCases(
     val getContactWithId: GetContact,

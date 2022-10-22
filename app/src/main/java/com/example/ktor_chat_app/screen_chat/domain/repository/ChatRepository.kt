@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.chat_screen
+package com.example.ktor_chat_app.screen_chat.domain.repository
 
 import com.example.ktor_chat_app.data.local.entity.ChatMessageEntity
 import kotlinx.coroutines.flow.Flow

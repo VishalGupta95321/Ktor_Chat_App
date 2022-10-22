@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.chat_screen
+package com.example.ktor_chat_app.screen_chat.presentation
 
 import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,11 +13,11 @@ import com.example.ktor_chat_app.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(
-    viewModel:ChatViewModel = hiltViewModel(),
+    viewModel: ChatViewModel = hiltViewModel(),
     sendToId:String,
 ) {
     val chatList = viewModel.chatList.value
-    val contactData = viewModel.contactData.value
+    val contactData = viewModel.contactInfo.value
     val text = viewModel.textFieldValue.value
 
     Log.d("kkkkk",";;;;")
@@ -36,11 +36,13 @@ fun ChatScreen(
             ){
             items(items = chatList){ item->
                 ChatListItem(chat = item)
-                viewModel.onEvent(ChatEvents.UpdateSeen(
-                    fromId = item.fromId,
-                    isIncoming = item.incoming,
-                    messageId = item.messageId
-                ))
+                viewModel.onEvent(
+                    ChatEvents.UpdateSeen(
+                        fromId = item.fromId,
+                        isIncoming = item.incoming,
+                        messageId = item.messageId
+                    )
+                )
             }
         }
 

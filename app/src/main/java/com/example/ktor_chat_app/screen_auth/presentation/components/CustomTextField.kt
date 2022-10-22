@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.login_signup_screen.components
+package com.example.ktor_chat_app.screen_auth.presentation.components
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding

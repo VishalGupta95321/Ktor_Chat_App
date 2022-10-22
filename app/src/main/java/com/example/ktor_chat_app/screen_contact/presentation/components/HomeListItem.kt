@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.screen_home.presentation.components
+package com.example.ktor_chat_app.screen_contact.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

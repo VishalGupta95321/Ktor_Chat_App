@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.main
+package com.example.ktor_chat_app
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -8,10 +8,10 @@ import com.example.ktor_chat_app.data.remote.model.ChatMessage
 import com.example.ktor_chat_app.data.remote.model.MessageDelivered
 import com.example.ktor_chat_app.data.remote.model.MessageSeen
 import com.example.ktor_chat_app.data.remote.model.User
-import com.example.ktor_chat_app.main.webSocketUseCases.WebSocketUseCases
+import com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case.WebSocketUseCases
 import com.example.ktor_chat_app.screen_chat.domain.use_case.modify_chat_use_case.ModifyChatUseCases
 import com.example.ktor_chat_app.screen_contact.domain.use_case.ContactUseCases
-import com.example.ktor_chat_app.utility.DispatcherProvider
+import com.example.ktor_chat_app.core.utility.DispatcherProvider
 import com.tinder.scarlet.WebSocket
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AppViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val dispatchers: DispatcherProvider,
     private val webSocketUseCases: WebSocketUseCases,
     private val insDelChatUseCases: ModifyChatUseCases,

@@ -1,20 +1,18 @@
-package com.example.ktor_chat_app.presentation
+package com.example.ktor_chat_app.navgraph
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.ktor_chat_app.navgraph.HomeGraph
-import com.example.ktor_chat_app.presentation.login_signup_screen.LoginSignUpViewModel
-import com.example.ktor_chat_app.presentation.login_signup_screen.navGraph.authGraph
+import com.example.ktor_chat_app.screen_auth.presentation.LoginSignUpViewModel
 
 
 @Composable
 fun RootNavGraph(
     navController: NavHostController,
 ){
-    val authViewModel : LoginSignUpViewModel  = hiltViewModel()
+    val authViewModel : LoginSignUpViewModel = hiltViewModel()
     NavHost(
         navController = navController ,
         route = Graph.Root.root,

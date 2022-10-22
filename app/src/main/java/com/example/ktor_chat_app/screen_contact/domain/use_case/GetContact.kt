@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.contacts_screen.use_cases
+package com.example.ktor_chat_app.screen_contact.domain.use_case
 
 import com.example.ktor_chat_app.data.local.entity.UserEntity
 import com.example.ktor_chat_app.screen_contact.domain.repository.ContactRepository

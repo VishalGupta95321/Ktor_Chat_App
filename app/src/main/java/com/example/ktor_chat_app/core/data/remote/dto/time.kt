@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.data.remote.dto
+package com.example.ktor_chat_app.core.data.remote.dto
 
 import com.example.ktor_chat_app.data.remote.model.ChatMessage
 import java.text.SimpleDateFormat

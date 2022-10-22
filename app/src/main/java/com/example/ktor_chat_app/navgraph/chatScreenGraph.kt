@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.presentation.chat_screen
+package com.example.ktor_chat_app.navgraph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController

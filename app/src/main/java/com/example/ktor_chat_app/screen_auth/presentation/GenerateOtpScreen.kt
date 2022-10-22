@@ -17,17 +17,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.ktor_chat_app.R
-import com.example.ktor_chat_app.presentation.login_signup_screen.LoginSignUpEvents
-import com.example.ktor_chat_app.presentation.login_signup_screen.LoginSignUpViewModel
-import com.example.ktor_chat_app.presentation.login_signup_screen.UiEvent
-import com.example.ktor_chat_app.presentation.main.MainActivity
+import com.example.ktor_chat_app.main.MainActivity
+import com.example.ktor_chat_app.screen_auth.presentation.LoginSignUpEvents
+import com.example.ktor_chat_app.screen_auth.presentation.LoginSignUpViewModel
+import com.example.ktor_chat_app.screen_auth.presentation.UiEvent
+import com.example.ktor_chat_app.screen_auth.presentation.components.CustomButton
+import com.example.ktor_chat_app.screen_auth.presentation.components.CustomTextField
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GenerateOtpScreen(
-    viewModel:LoginSignUpViewModel,
+    viewModel: LoginSignUpViewModel,
     navigateToVerificationScreen:()->Unit,
 ) {
     val nameTextState = viewModel.name.value
