@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.core.data.remote.model
+package com.example.ktor_chat_app.web_socket.data.remote.req_and_res
 
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_MESSAGE_DELIVERED
 

@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.core.data.local
+package com.example.ktor_chat_app.data.local
 
 import androidx.room.*
 import com.example.ktor_chat_app.data.local.entity.ChatMessageEntity

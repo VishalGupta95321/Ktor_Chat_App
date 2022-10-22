@@ -7,13 +7,13 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case.WebSocketUseCases
-import com.example.ktor_chat_app.screen_chat.domain.use_case.modify_chat_use_case.ModifyChatUseCases
-import com.example.ktor_chat_app.screen_chat.domain.use_case.retrieve_chat_use_case.RetrieveChatUseCases
-import com.example.ktor_chat_app.screen_contact.domain.use_case.ContactUseCases
 import com.example.ktor_chat_app.core.utility.DispatcherProvider
 import com.example.ktor_chat_app.core.utility.clientId
 import com.example.ktor_chat_app.core.utility.dateFormat
+import com.example.ktor_chat_app.screen_chat.domain.use_case.modify_chat_use_case.ModifyChatUseCases
+import com.example.ktor_chat_app.screen_chat.domain.use_case.retrieve_chat_use_case.RetrieveChatUseCases
+import com.example.ktor_chat_app.screen_contact.domain.use_case.ContactUseCases
+import com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case.WebSocketUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
@@ -99,6 +99,7 @@ class ChatViewModel @Inject constructor(
      private fun retrieveAllChats(roomId:String) {
         viewModelScope.launch {
             retrieveChatUseCases.retrieveAllChatsByRoom(roomId).collect { chatMessages ->
+                //todo "here we are not using extension function that convert chatMessageEntity to CharMessage because of some unknown error "
                 _chatList.value = chatMessages.map {
                     ChatState(
                         messageSeen = it.messageSeen,

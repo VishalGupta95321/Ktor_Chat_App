@@ -3,15 +3,15 @@ package com.example.ktor_chat_app
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ktor_chat_app.data.remote.dto.asDataBaseModel
-import com.example.ktor_chat_app.data.remote.model.ChatMessage
-import com.example.ktor_chat_app.data.remote.model.MessageDelivered
-import com.example.ktor_chat_app.data.remote.model.MessageSeen
-import com.example.ktor_chat_app.data.remote.model.User
-import com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case.WebSocketUseCases
+import com.example.ktor_chat_app.core.utility.DispatcherProvider
 import com.example.ktor_chat_app.screen_chat.domain.use_case.modify_chat_use_case.ModifyChatUseCases
 import com.example.ktor_chat_app.screen_contact.domain.use_case.ContactUseCases
-import com.example.ktor_chat_app.core.utility.DispatcherProvider
+import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.MessageDelivered
+import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.MessageSeen
+import com.example.ktor_chat_app.web_socket.data.remote.responce.ChatMessage
+import com.example.ktor_chat_app.web_socket.data.remote.responce.User
+import com.example.ktor_chat_app.web_socket.data.remote.responce.dto.asDataBaseModel
+import com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case.WebSocketUseCases
 import com.tinder.scarlet.WebSocket
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -89,7 +89,6 @@ class MainViewModel @Inject constructor(
                             )
                         }
                     }
-
                 }
             }
         }

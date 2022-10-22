@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import com.example.ktor_chat_app.data.remote.model.RegisterUserRequest
-import com.example.ktor_chat_app.data.remote.webScoketApi.ChatApi
+import com.example.ktor_chat_app.web_socket.data.remote.request.RegisterUserRequest
+import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.ChatApi
 import com.example.ktor_chat_app.screen_auth.domain.repository.AuthRepository
 import com.example.ktor_chat_app.core.utility.clientId
 import com.example.ktor_chat_app.core.utility.saveUser

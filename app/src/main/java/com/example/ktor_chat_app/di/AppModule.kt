@@ -4,11 +4,11 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.room.Room
-import com.example.ktor_chat_app.data.local.ChatDao
-import com.example.ktor_chat_app.data.local.ChatDatabase
 import com.example.ktor_chat_app.core.utility.DispatcherProvider
 import com.example.ktor_chat_app.core.utility.clientId
 import com.example.ktor_chat_app.core.utility.dataStore
+import com.example.ktor_chat_app.data.local.ChatDao
+import com.example.ktor_chat_app.data.local.ChatDatabase
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -60,8 +60,6 @@ object AppModule {
     fun provideChatDao(database: ChatDatabase): ChatDao {
         return database.chatDao()
     }
-
-
 
 
     @Singleton

@@ -16,8 +16,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.ktor_chat_app.MainActivity
 import com.example.ktor_chat_app.R
-import com.example.ktor_chat_app.main.MainActivity
 import com.example.ktor_chat_app.screen_auth.presentation.LoginSignUpEvents
 import com.example.ktor_chat_app.screen_auth.presentation.LoginSignUpViewModel
 import com.example.ktor_chat_app.screen_auth.presentation.UiEvent

@@ -1,6 +1,6 @@
 package com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case
 
-import com.example.ktor_chat_app.data.remote.model.MessageSeen
+import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.MessageSeen
 import com.example.ktor_chat_app.web_socket.domain.repository.WebSocketRepository
 import javax.inject.Inject
 
@@ -14,10 +14,12 @@ class SendMessageSeen @Inject constructor(
         fromId: String){
 
         if (isIncoming){
-            repository.sendToWebSocket(MessageSeen(
+            repository.sendToWebSocket(
+                MessageSeen(
                 toId = fromId,
                 messageId = messageId
-            ))
+            )
+            )
         }
     }
 }

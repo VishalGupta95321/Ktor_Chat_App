@@ -3,8 +3,8 @@ package com.example.ktor_chat_app.screen_chat.domain.use_case.modify_chat_use_ca
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.example.ktor_chat_app.data.local.entity.ChatMessageEntity
-import com.example.ktor_chat_app.data.remote.dto.asDataBaseModel
-import com.example.ktor_chat_app.data.remote.model.ChatMessage
+import com.example.ktor_chat_app.web_socket.data.remote.responce.dto.asDataBaseModel
+import com.example.ktor_chat_app.web_socket.data.remote.responce.ChatMessage
 import com.example.ktor_chat_app.screen_chat.domain.repository.ChatRepository
 import com.example.ktor_chat_app.core.utility.clientId
 import javax.inject.Inject

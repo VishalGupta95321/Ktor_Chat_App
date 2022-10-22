@@ -1,8 +1,7 @@
-package com.example.ktor_chat_app.core.data.remote.webScoketApi
+package com.example.ktor_chat_app.web_socket.data.remote.webScoketApi
 
 
 import android.util.Log
-import com.example.ktor_chat_app.data.remote.model.*
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_BLOCK_USER_REQUEST
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_CHAT_MESSAGE
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_CONTACT_AVAILABLE
@@ -11,6 +10,15 @@ import com.example.ktor_chat_app.core.utility.Constants.TYPE_MESSAGE_SEEN
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_REGISTER_USER
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_UNBLOCK_USER_REQUEST
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_USER
+import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.BaseModel
+import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.MessageDelivered
+import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.MessageSeen
+import com.example.ktor_chat_app.web_socket.data.remote.request.BlockUserRequest
+import com.example.ktor_chat_app.web_socket.data.remote.request.ContactAvailable
+import com.example.ktor_chat_app.web_socket.data.remote.request.RegisterUserRequest
+import com.example.ktor_chat_app.web_socket.data.remote.request.UnblockUserRequest
+import com.example.ktor_chat_app.web_socket.data.remote.responce.ChatMessage
+import com.example.ktor_chat_app.web_socket.data.remote.responce.User
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.tinder.scarlet.Message

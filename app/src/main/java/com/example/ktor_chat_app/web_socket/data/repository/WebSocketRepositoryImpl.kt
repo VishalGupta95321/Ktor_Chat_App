@@ -1,7 +1,7 @@
 package com.example.ktor_chat_app.web_socket.data.repository
 
-import com.example.ktor_chat_app.data.remote.model.BaseModel
-import com.example.ktor_chat_app.data.remote.webScoketApi.ChatApi
+import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.BaseModel
+import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.ChatApi
 import com.example.ktor_chat_app.web_socket.domain.repository.WebSocketRepository
 import com.tinder.scarlet.WebSocket
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +15,7 @@ class WebSocketRepositoryImpl @Inject constructor(
         return api.observeEvents()
     }
 
-    override suspend fun sendToWebSocket(data:BaseModel){
+    override suspend fun sendToWebSocket(data: BaseModel){
          api.sendBaseModel(data)
     }
 

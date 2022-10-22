@@ -3,10 +3,10 @@ package com.example.ktor_chat_app.web_socket.di
 import android.app.Application
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import com.example.ktor_chat_app.data.remote.webScoketApi.ChatApi
-import com.example.ktor_chat_app.data.remote.webScoketApi.CustomGsonMessageAdapter
-import com.example.ktor_chat_app.data.remote.webScoketApi.FlowStreamAdapter
 import com.example.ktor_chat_app.core.utility.Constants
+import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.ChatApi
+import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.CustomGsonMessageAdapter
+import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.FlowStreamAdapter
 import com.example.ktor_chat_app.web_socket.data.repository.WebSocketRepositoryImpl
 import com.example.ktor_chat_app.web_socket.domain.repository.WebSocketRepository
 import com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case.*

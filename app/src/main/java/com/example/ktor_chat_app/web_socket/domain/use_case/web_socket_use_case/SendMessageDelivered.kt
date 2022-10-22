@@ -1,7 +1,7 @@
 package com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case
 
 import android.util.Log
-import com.example.ktor_chat_app.data.remote.model.MessageDelivered
+import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.MessageDelivered
 import com.example.ktor_chat_app.web_socket.domain.repository.WebSocketRepository
 import javax.inject.Inject
 

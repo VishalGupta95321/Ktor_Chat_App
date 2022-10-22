@@ -1,6 +1,6 @@
 package com.example.ktor_chat_app.web_socket.domain.repository
 
-import com.example.ktor_chat_app.data.remote.model.BaseModel
+import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.BaseModel
 import com.tinder.scarlet.WebSocket
 import kotlinx.coroutines.flow.Flow
 

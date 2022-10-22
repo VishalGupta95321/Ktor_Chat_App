@@ -2,7 +2,7 @@ package com.example.ktor_chat_app.screen_auth.di
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import com.example.ktor_chat_app.data.remote.webScoketApi.ChatApi
+import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.ChatApi
 import com.example.ktor_chat_app.data.repository.AuthRepositoryImpl
 import com.example.ktor_chat_app.screen_auth.domain.repository.AuthRepository
 import com.example.ktor_chat_app.screen_auth.domain.use_case.*

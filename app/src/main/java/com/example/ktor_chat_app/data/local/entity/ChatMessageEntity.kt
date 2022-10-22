@@ -1,9 +1,9 @@
-package com.example.ktor_chat_app.core.data.local.entity
+package com.example.ktor_chat_app.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.ktor_chat_app.data.remote.model.ChatMessage
 import com.example.ktor_chat_app.core.utility.Constants.TABLE_NAME
+import com.example.ktor_chat_app.web_socket.data.remote.responce.ChatMessage
 
 
 @Entity(tableName = TABLE_NAME)

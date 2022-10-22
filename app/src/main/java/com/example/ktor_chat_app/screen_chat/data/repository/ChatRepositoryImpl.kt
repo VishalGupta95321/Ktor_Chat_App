@@ -2,7 +2,7 @@ package com.example.ktor_chat_app.screen_chat.data.repository
 
 import com.example.ktor_chat_app.data.local.ChatDao
 import com.example.ktor_chat_app.data.local.entity.ChatMessageEntity
-import com.example.ktor_chat_app.data.remote.webScoketApi.ChatApi
+import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.ChatApi
 import com.example.ktor_chat_app.screen_chat.domain.repository.ChatRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
