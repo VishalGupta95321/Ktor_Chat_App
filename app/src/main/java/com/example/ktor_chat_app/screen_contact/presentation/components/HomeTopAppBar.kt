@@ -58,34 +58,3 @@ fun HomeTopAppBar(
 fun pp (){
     HomeTopAppBar("Select Contact")
 }
-
-
-//fun HomeTopAppdBar(){
-//    SmallTopAppBar(modifier = Modifier
-//        .padding(bottom = 5.dp),
-//        title = {
-//
-//            Text(
-//                color = Color(0xff008e76),
-//                text = "WELCOME !!",
-//                fontSize = 25.sp,
-//                fontWeight = FontWeight.W800,
-//                maxLines = 1,
-//            )
-//        },
-//        actions = {
-//            IconButton(onClick = { /* doSomething() */ }) {
-//                Image(
-//                    imageVector = ImageVector.vectorResource(id = R.drawable.search_icon) ,
-//                    contentDescription = "Localized description"
-//                )
-//            }
-//            IconButton(onClick = { /* doSomething() */ }) {
-//                Image(
-//                    imageVector = ImageVector.vectorResource(id = R.drawable.more_vert) ,
-//                    contentDescription = "Localized description"
-//                )
-//            }
-//        }
-//    )
-//}

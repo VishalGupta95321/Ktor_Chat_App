@@ -7,7 +7,6 @@ import com.example.ktor_chat_app.core.utility.Constants.TYPE_CHAT_MESSAGE
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_CONTACT_AVAILABLE
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_MESSAGE_DELIVERED
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_MESSAGE_SEEN
-import com.example.ktor_chat_app.core.utility.Constants.TYPE_REGISTER_USER
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_UNBLOCK_USER_REQUEST
 import com.example.ktor_chat_app.core.utility.Constants.TYPE_USER
 import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.BaseModel
@@ -15,20 +14,18 @@ import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.MessageDeliv
 import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.MessageSeen
 import com.example.ktor_chat_app.web_socket.data.remote.request.BlockUserRequest
 import com.example.ktor_chat_app.web_socket.data.remote.request.ContactAvailable
-import com.example.ktor_chat_app.web_socket.data.remote.request.RegisterUserRequest
 import com.example.ktor_chat_app.web_socket.data.remote.request.UnblockUserRequest
 import com.example.ktor_chat_app.web_socket.data.remote.responce.ChatMessage
 import com.example.ktor_chat_app.web_socket.data.remote.responce.User
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.tinder.scarlet.Message
-
 import com.tinder.scarlet.MessageAdapter
 import java.lang.reflect.Type
 
 @Suppress("UNCHECKED_CAST")
 class CustomGsonMessageAdapter<T> private constructor(
-    val gson: Gson
+    private val gson: Gson
 ) : MessageAdapter<T> {
 
     override fun fromMessage(message: Message): T {
@@ -40,7 +37,6 @@ class CustomGsonMessageAdapter<T> private constructor(
         val jsonObject = JsonParser.parseString(stringValue).asJsonObject
         val type = when (jsonObject.get("type").asString) {
             TYPE_CHAT_MESSAGE -> ChatMessage::class.java
-            TYPE_REGISTER_USER -> RegisterUserRequest::class.java
             TYPE_MESSAGE_SEEN -> MessageSeen::class.java
             TYPE_MESSAGE_DELIVERED -> MessageDelivered::class.java
             TYPE_USER -> User::class.java
@@ -53,7 +49,6 @@ class CustomGsonMessageAdapter<T> private constructor(
     override fun toMessage(data: T): Message {
         var convertedData = data as BaseModel
         convertedData = when (convertedData.type) {
-            TYPE_REGISTER_USER -> convertedData as RegisterUserRequest
             TYPE_CHAT_MESSAGE -> convertedData as ChatMessage
             TYPE_MESSAGE_SEEN -> convertedData as MessageSeen
             TYPE_MESSAGE_DELIVERED -> convertedData as MessageDelivered

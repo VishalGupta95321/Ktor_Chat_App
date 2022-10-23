@@ -2,9 +2,9 @@ package com.example.ktor_chat_app.web_socket.domain.use_case.web_socket_use_case
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import com.example.ktor_chat_app.core.utility.credentials
 import com.example.ktor_chat_app.web_socket.data.remote.responce.ChatMessage
 import com.example.ktor_chat_app.web_socket.domain.repository.WebSocketRepository
-import com.example.ktor_chat_app.core.utility.clientId
 import javax.inject.Inject
 
 class SendChat @Inject constructor(
@@ -23,7 +23,7 @@ class SendChat @Inject constructor(
                 messageId = uuid,
                 timestamp = System.currentTimeMillis(),
                 toId = idToSend,
-                fromId = dataStore.clientId()
+                fromId = dataStore.credentials()[0].toString()
             )
         )
     }

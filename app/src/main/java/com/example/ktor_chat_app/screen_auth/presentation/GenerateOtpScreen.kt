@@ -16,10 +16,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.ktor_chat_app.MainActivity
 import com.example.ktor_chat_app.R
-import com.example.ktor_chat_app.screen_auth.presentation.LoginSignUpEvents
-import com.example.ktor_chat_app.screen_auth.presentation.LoginSignUpViewModel
+import com.example.ktor_chat_app.core.presentation.MainActivity
+import com.example.ktor_chat_app.screen_auth.presentation.AuthEvents
+import com.example.ktor_chat_app.screen_auth.presentation.AuthViewModel
 import com.example.ktor_chat_app.screen_auth.presentation.UiEvent
 import com.example.ktor_chat_app.screen_auth.presentation.components.CustomButton
 import com.example.ktor_chat_app.screen_auth.presentation.components.CustomTextField
@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GenerateOtpScreen(
-    viewModel: LoginSignUpViewModel,
+    viewModel: AuthViewModel,
     navigateToVerificationScreen:()->Unit,
 ) {
     val nameTextState = viewModel.name.value
@@ -82,13 +82,13 @@ fun GenerateOtpScreen(
             CustomTextField(
                 text = nameTextState.text,
                 label = nameTextState.label,
-                onValueChange = { viewModel.onEvent(LoginSignUpEvents.EnteredNameEvent(it))},
+                onValueChange = { viewModel.onEvent(AuthEvents.EnteredNameEvent(it))},
                 keyboardType = KeyboardType.Text
             )
             CustomTextField(
                 text = phoneNoTextState.text,
                 label = phoneNoTextState.label,
-                onValueChange = { viewModel.onEvent(LoginSignUpEvents.EnteredPhoneNoEvent(it)) },
+                onValueChange = { viewModel.onEvent(AuthEvents.EnteredPhoneNoEvent(it)) },
                 keyboardType = KeyboardType.Phone
             )
 
@@ -96,7 +96,7 @@ fun GenerateOtpScreen(
 
             CustomButton(
                 onClick = {
-                    viewModel.onEvent(LoginSignUpEvents.GenerateOtpEvent(activity))
+                    viewModel.onEvent(AuthEvents.GenerateOtpEvent(activity))
                 },
                 label = "Continue"
             )

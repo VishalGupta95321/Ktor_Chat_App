@@ -2,7 +2,6 @@ package com.example.ktor_chat_app.screen_auth.di
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.ChatApi
 import com.example.ktor_chat_app.data.repository.AuthRepositoryImpl
 import com.example.ktor_chat_app.screen_auth.domain.repository.AuthRepository
 import com.example.ktor_chat_app.screen_auth.domain.use_case.*
@@ -30,11 +29,10 @@ object AuthModule {
     @Singleton
     @Provides
     fun provideAuthRepository(
-        api: ChatApi,
         auth: FirebaseAuth,
         datastore: DataStore<Preferences>
     ): AuthRepository {
-        return AuthRepositoryImpl(api,datastore,auth)
+        return AuthRepositoryImpl(datastore,auth)
     }
 
     @Singleton
@@ -43,9 +41,8 @@ object AuthModule {
         return AuthUseCases(
             otpVerification = OtpVerification(authRepository),
             generateOrResendOtp = GenerateOrResendOtp(repository = authRepository),
-            registerToServer = RegisterToServer(repository = authRepository),
             isUserAuthenticated = IsUserAuthenticated(repository = authRepository),
-            saveUserToDatabase = SaveUserToDatabase(repository = authRepository),
+            saveCredentialsToDatastore = SaveCredentialsToDatastore(repository = authRepository),
             signOut = SignOut(repository = authRepository)
         )
     }

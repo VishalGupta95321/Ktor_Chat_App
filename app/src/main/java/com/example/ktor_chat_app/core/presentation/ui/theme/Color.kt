@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app.core.ui.theme
+package com.example.ktor_chat_app.core.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

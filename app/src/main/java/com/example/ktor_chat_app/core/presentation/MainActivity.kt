@@ -1,9 +1,8 @@
-package com.example.ktor_chat_app
+package com.example.ktor_chat_app.core.presentation
 
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -14,33 +13,18 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
-import com.example.ktor_chat_app.core.ui.theme.Ktor_Chat_AppTheme
-import com.example.ktor_chat_app.core.utility.clientId
+import com.example.ktor_chat_app.core.presentation.components.Navigation
+import com.example.ktor_chat_app.core.presentation.components.Screens
+import com.example.ktor_chat_app.core.presentation.ui.theme.Ktor_Chat_AppTheme
+import com.example.ktor_chat_app.core.utility.credentials
 import com.example.ktor_chat_app.core.utility.dataStore
-import com.example.ktor_chat_app.core.utility.saveUser
-import com.example.ktor_chat_app.data.local.ChatDatabase
-import com.example.ktor_chat_app.navgraph.HomeGraph
-import com.example.ktor_chat_app.navgraph.RootNavGraph
-import com.example.ktor_chat_app.web_socket.data.remote.request.RegisterUserRequest
-import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.ChatApi
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-
-    @Inject
-    lateinit var chatApi: ChatApi
-
-    @Inject
-    lateinit var database: ChatDatabase
 
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -48,46 +32,37 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val viewModel : MainViewModel by viewModels()
-        viewModel.observeBaseModels()
         viewModel.observeConnectionEvent()
 
-// +919532169104
-        // +919682824770
-//                 dataStore.clientId()
-        //}
-       // Log.d("client", "doe" + clientId.toString())
-        lifecycleScope.launch {
-            database.chatDao().updateUserActiveStatus(userId = "+919532169104")
-            Log.d("kkkkk","got it")
-            dataStore.saveUser("+919682824770")
-
-            //dataStore.saveUser("+919532169104")
-            Toast.makeText(this@MainActivity,dataStore.clientId(),Toast.LENGTH_LONG).show()
-            delay(2000L)
-            chatApi.sendBaseModel(RegisterUserRequest("ajhfjga",dataStore.clientId()))
-        }
-
+        var destination : Screens
 
         var clientId : String? = null
+
         runBlocking {
-            clientId = dataStore.clientId()
+            clientId = dataStore.credentials()[0]
             Log.d("kkk",clientId.toString())
         }
+
         setContent {
             MaterialTheme {
                 window?.statusBarColor = Color(0xFF03DAC5).toArgb()
             }
             val navController = rememberNavController()
 
-
             Ktor_Chat_AppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    if (!clientId.isNullOrEmpty()){
-                       HomeGraph(navController = navController)
-                    }else {RootNavGraph(navController = navController)}
+                    destination = if (!clientId.isNullOrEmpty()) {
+                        Screens.HomeContactScreen
+                    } else {
+                        Screens.GenerateOtpScreen
+                    }
+                    Navigation(
+                        navController = navController ,
+                        startDestination = destination
+                    )
                 }
             }
         }
@@ -108,4 +83,5 @@ TODO - Suggestion
         3) fix navigation
         4) splash screen
         5) change .copy to .update
+        6) not necessary now but if want - g = fix navigation that using multiple nav graph
  */

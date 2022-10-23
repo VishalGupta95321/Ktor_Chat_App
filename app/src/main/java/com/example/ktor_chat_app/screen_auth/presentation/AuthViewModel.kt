@@ -7,13 +7,12 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ktor_chat_app.web_socket.data.remote.request.InvalidRequestException
-import com.example.ktor_chat_app.web_socket.data.remote.request.RegisterUserRequest
-import com.example.ktor_chat_app.data.repository.AuthResponse
-import com.example.ktor_chat_app.screen_auth.domain.use_case.AuthUseCases
 import com.example.ktor_chat_app.core.utility.Constants.INDIA_TELECOM_PREFIX
 import com.example.ktor_chat_app.core.utility.Constants.MAX_PHONE_NO_LENGTH
 import com.example.ktor_chat_app.core.utility.dataStore
+import com.example.ktor_chat_app.data.repository.AuthResponse
+import com.example.ktor_chat_app.screen_auth.domain.use_case.AuthUseCases
+import com.example.ktor_chat_app.screen_auth.domain.use_case.InvalidRequestException
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
@@ -29,7 +28,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginSignUpViewModel @Inject constructor(
+class AuthViewModel @Inject constructor(
     private val authUseCases: AuthUseCases,
     ): ViewModel(){
 
@@ -64,37 +63,36 @@ class LoginSignUpViewModel @Inject constructor(
     private var verificationID : String? = null
     private var datastore:DataStore<Preferences>? = null
 
-    fun onEvent(event: LoginSignUpEvents){
+    fun onEvent(event: AuthEvents){
         when(event){
 
-            is LoginSignUpEvents.EnteredNameEvent -> {
+            is AuthEvents.EnteredNameEvent -> {
                 _name.value = _name.value.copy(
                     text = event.value
                 )
             }
 
-            is LoginSignUpEvents.EnteredPhoneNoEvent -> {
+            is AuthEvents.EnteredPhoneNoEvent -> {
                 _contact.value = _contact.value.copy(
                     text = event.value
                 )
             }
 
-            is LoginSignUpEvents.EnteredOtpEvent ->{
+            is AuthEvents.EnteredOtpEvent ->{
                 _smsCode.value = _smsCode.value.copy(
                     text = event.value
                 )
             }
 
-            is LoginSignUpEvents.GenerateOtpEvent -> {
+            is AuthEvents.GenerateOtpEvent -> {
                 datastore = event.activity.dataStore
 
                 viewModelScope.launch {
                     try {
                         authUseCases.generateOrResendOtp(
-                            RegisterUserRequest(
-                                name = _name.value.text,
-                                id = _contact.value.text
-                            ), phoneAuthOptions(
+                            name = _name.value.text,
+                            id = _contact.value.text,
+                            options =  phoneAuthOptions(
                                 _contact.value.text,
                                 event.activity
                             )
@@ -109,14 +107,13 @@ class LoginSignUpViewModel @Inject constructor(
                 }
             }
 
-            is LoginSignUpEvents.ResendOtpEvent -> {
+            is AuthEvents.ResendOtpEvent -> {
                 viewModelScope.launch {
                     try {
                         authUseCases.generateOrResendOtp(
-                            RegisterUserRequest(
-                                name = _name.value.text,
-                                id = _contact.value.text
-                            ),phoneAuthOptions(
+                            name = _name.value.text,
+                            id = _contact.value.text,
+                            options =  phoneAuthOptions(
                                 _contact.value.text,
                                 event.activity
                             )
@@ -131,7 +128,7 @@ class LoginSignUpViewModel @Inject constructor(
                 }
             }
 
-            is LoginSignUpEvents.CompleteLoginEvent -> {
+            is AuthEvents.CompleteLoginEvent -> {
                 if (credential == null){
                     credential = PhoneAuthProvider.getCredential(verificationID!!,event.value)
                 }
@@ -146,8 +143,10 @@ class LoginSignUpViewModel @Inject constructor(
                            }
                            is AuthResponse.Success -> {
                                _eventFlow.emit(UiEvent.LoginSuccessful)
-                                authUseCases.registerToServer(RegisterUserRequest(_name.value.text,_contact.value.text))
-                                authUseCases.saveUserToDatabase(_contact.value.text)
+                                authUseCases.saveCredentialsToDatastore(
+                                    _contact.value.text,
+                                    _name.value.text
+                                )
                            }
                            else -> _eventFlow.emit(UiEvent.OnError("Something went wrong !!"))
                        }
@@ -155,7 +154,7 @@ class LoginSignUpViewModel @Inject constructor(
                 }
             }
 
-            is LoginSignUpEvents.SignOut -> {
+            is AuthEvents.SignOut -> {
                 viewModelScope.launch{
                     authUseCases.signOut
                 }
@@ -196,7 +195,7 @@ class LoginSignUpViewModel @Inject constructor(
                     override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
                         credential = phoneAuthCredential
                         viewModelScope.launch{
-                            onEvent(LoginSignUpEvents.CompleteLoginEvent(_smsCode.value.text))
+                            onEvent(AuthEvents.CompleteLoginEvent(_smsCode.value.text))
                         }
                     }
 

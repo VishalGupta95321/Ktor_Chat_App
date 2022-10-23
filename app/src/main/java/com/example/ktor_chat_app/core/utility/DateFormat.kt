@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun dateFormat(timeStamp:Long):String {
-    val time = SimpleDateFormat("mm:kk:ss", Locale.getDefault())
+    val time = SimpleDateFormat(
+        "d MMM yyyy HH:mm ",
+        Locale.getDefault()
+    )
     return time.format(timeStamp)
 }

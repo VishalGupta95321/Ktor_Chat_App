@@ -5,7 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.room.Room
 import com.example.ktor_chat_app.core.utility.DispatcherProvider
-import com.example.ktor_chat_app.core.utility.clientId
+import com.example.ktor_chat_app.core.utility.credentials
 import com.example.ktor_chat_app.core.utility.dataStore
 import com.example.ktor_chat_app.data.local.ChatDao
 import com.example.ktor_chat_app.data.local.ChatDatabase
@@ -31,8 +31,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideClientId(@ApplicationContext context: Context): String {
-        return runBlocking { context.dataStore.clientId() }
+    fun provideCredentials(@ApplicationContext context: Context): List<String?> {
+        return runBlocking { context.dataStore.credentials() }
     }
 
     @Singleton
@@ -64,11 +64,12 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(clientId: String): OkHttpClient {
+    fun provideOkHttpClient(credentials: List<String?>): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val url = chain.request().url.newBuilder()
-                    .addQueryParameter("client_id", clientId)
+                    .addQueryParameter("client_id", credentials[0])
+                    .addQueryParameter("user_name", credentials[1])
                     .build()
                 val request = chain.request().newBuilder()
                     .url(url)

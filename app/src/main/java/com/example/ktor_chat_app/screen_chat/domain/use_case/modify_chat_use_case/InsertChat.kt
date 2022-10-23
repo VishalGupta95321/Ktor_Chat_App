@@ -2,11 +2,11 @@ package com.example.ktor_chat_app.screen_chat.domain.use_case.modify_chat_use_ca
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import com.example.ktor_chat_app.core.utility.credentials
 import com.example.ktor_chat_app.data.local.entity.ChatMessageEntity
-import com.example.ktor_chat_app.web_socket.data.remote.responce.dto.asDataBaseModel
-import com.example.ktor_chat_app.web_socket.data.remote.responce.ChatMessage
 import com.example.ktor_chat_app.screen_chat.domain.repository.ChatRepository
-import com.example.ktor_chat_app.core.utility.clientId
+import com.example.ktor_chat_app.web_socket.data.remote.responce.ChatMessage
+import com.example.ktor_chat_app.web_socket.data.remote.responce.dto.asDataBaseModel
 import javax.inject.Inject
 
 class InsertChat @Inject constructor(
@@ -35,7 +35,7 @@ class InsertChat @Inject constructor(
                 messageId = uuid,
                 timestamp = System.currentTimeMillis(),
                 toId = idToSend,
-                fromId = dataStore.clientId()
+                fromId = dataStore.credentials()[0].toString()
             )
         )
     }

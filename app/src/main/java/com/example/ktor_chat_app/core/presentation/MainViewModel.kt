@@ -1,4 +1,4 @@
-package com.example.ktor_chat_app
+package com.example.ktor_chat_app.core.presentation
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -30,7 +30,7 @@ class MainViewModel @Inject constructor(
     private var contactsUpdateJob: Job? = null
     private var chatUpdateJob: Job? = null
 
-    // private
+     private
      fun observeBaseModels() {
         viewModelScope.launch(dispatchers.io) {
             webSocketUseCases.observeBaseModel().collect{ baseModel ->
@@ -94,22 +94,22 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    //private
+   // private
     fun observeConnectionEvent(){
         viewModelScope.launch(dispatchers.io) {
             webSocketUseCases.observeConnectionEvents().collect{ connectionEvent->
                 when(connectionEvent){
 
                     is WebSocket.Event.OnConnectionOpened<*> -> {
-                        Log.d("llll","con")
+
                     }
 
                     is WebSocket.Event.OnConnectionFailed -> {
-                        Log.d("llll","dis")
+
                     }
 
                     is WebSocket.Event.OnConnectionClosed -> {
-                        Log.d("llll","dis")
+
                     }
                     else -> Unit
                 }
@@ -117,8 +117,8 @@ class MainViewModel @Inject constructor(
         }
     }
 
-//    init {
-//        observeConnectionEvent()
-//        observeBaseModels()
-//    }
+    init {
+        observeConnectionEvent()
+        observeBaseModels()
+   }
 }

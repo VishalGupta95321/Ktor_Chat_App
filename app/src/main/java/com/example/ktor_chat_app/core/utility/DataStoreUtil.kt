@@ -10,22 +10,28 @@ import kotlinx.coroutines.flow.first
 
 val Context.dataStore by preferencesDataStore("settings")
 
-suspend fun DataStore<Preferences>.clientId(): String {
+suspend fun DataStore<Preferences>.credentials(): List<String?> {
     val clientIdKey = stringPreferencesKey("clientId")
+    val userNameKey = stringPreferencesKey("userName")
     val preferences = data.first()
     val clientIdExists = preferences[clientIdKey] != null
     return if(clientIdExists) {
-        preferences[clientIdKey] ?: ""
-    } else ""
+        listOf(preferences[clientIdKey],preferences[userNameKey])
+    } else listOf("","")
 }
 
-suspend fun DataStore<Preferences>.saveUser(contactId: String){
+suspend fun DataStore<Preferences>.saveCredentials(
+    contactId: String,
+    contactName: String
+){
     val clientIdKey = stringPreferencesKey("clientId")
+    val userNameKey = stringPreferencesKey("userName")
     val preferences = data.first()
     val clientIdExists = preferences[clientIdKey] != null
     if (!clientIdExists) {
         edit { setting->
             setting[clientIdKey] = contactId
+            setting[userNameKey] = contactName
         }
     }
 }

@@ -16,8 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.ktor_chat_app.R
-import com.example.ktor_chat_app.screen_auth.presentation.LoginSignUpEvents
-import com.example.ktor_chat_app.screen_auth.presentation.LoginSignUpViewModel
+import com.example.ktor_chat_app.screen_auth.presentation.AuthEvents
+import com.example.ktor_chat_app.screen_auth.presentation.AuthViewModel
 import com.example.ktor_chat_app.screen_auth.presentation.UiEvent
 import com.example.ktor_chat_app.screen_auth.presentation.components.CustomButton
 import com.example.ktor_chat_app.screen_auth.presentation.components.CustomTextField
@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OtpVerificationScreen(
-    viewModel: LoginSignUpViewModel,
+    viewModel: AuthViewModel,
     navigateToHome:()->Unit
 ) {
     val otpTextState = viewModel.smsCode.value
@@ -83,7 +83,7 @@ fun OtpVerificationScreen(
             CustomTextField(
                 text = otpTextState.text,
                 label = otpTextState.label,
-                onValueChange = { viewModel.onEvent(LoginSignUpEvents.EnteredOtpEvent(it))},
+                onValueChange = { viewModel.onEvent(AuthEvents.EnteredOtpEvent(it))},
                 keyboardType = KeyboardType.Number
             )
 
@@ -92,7 +92,7 @@ fun OtpVerificationScreen(
             CustomButton(
                 onClick = {
                     viewModel.onEvent(
-                        LoginSignUpEvents.CompleteLoginEvent(
+                        AuthEvents.CompleteLoginEvent(
                             otpTextState.text
                         )
                     )

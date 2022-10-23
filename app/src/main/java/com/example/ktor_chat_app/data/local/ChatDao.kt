@@ -16,7 +16,7 @@ interface ChatDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateChat(chat:ChatMessageEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertContact(contact:UserEntity)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)

@@ -5,18 +5,15 @@ import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import com.example.ktor_chat_app.web_socket.data.remote.request.RegisterUserRequest
-import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.ChatApi
+import com.example.ktor_chat_app.core.utility.credentials
+import com.example.ktor_chat_app.core.utility.saveCredentials
 import com.example.ktor_chat_app.screen_auth.domain.repository.AuthRepository
-import com.example.ktor_chat_app.core.utility.clientId
-import com.example.ktor_chat_app.core.utility.saveUser
 import com.google.firebase.auth.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-    private val api: ChatApi,
     private val datastore:DataStore<Preferences>,
     private val auth: FirebaseAuth,
 ) : AuthRepository {
@@ -52,16 +49,12 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun registerToServer(request: RegisterUserRequest) {
-        api.sendBaseModel(request)
-    }
-
-    override suspend fun saveUserToDatabase(userId:String){
-        return datastore.saveUser(userId)
+    override suspend fun saveUserToDatabase(userId:String, userName: String){
+        return datastore.saveCredentials(userId,userName)
     }
 
     override suspend fun isUserAuthenticated() : Boolean {
-        if (datastore.clientId().isBlank()){
+        if (datastore.credentials().isEmpty()){
            return false
         }
            return true

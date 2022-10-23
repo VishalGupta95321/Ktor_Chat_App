@@ -22,21 +22,3 @@ fun AddContactFloatingButton (
         )
     }
 }
-
-//@Composable
-//fun HomeFloatingBar() {
-//    FloatingActionButton(
-//        containerColor = Color.White,
-//        onClick = { /* do something */ },
-//    ) {
-//        Row(modifier = Modifier
-//            .height(50.dp)
-//            .width(50.dp)
-//            .background(Color.White)) {
-//            Image(
-//                imageVector = ImageVector.vectorResource(id = R.drawable.add_contact) ,
-//                contentDescription = "Add Contact"
-//            )
-//        }
-//    }
-//}

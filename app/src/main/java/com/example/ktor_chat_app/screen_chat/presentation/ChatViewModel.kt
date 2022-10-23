@@ -8,7 +8,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ktor_chat_app.core.utility.DispatcherProvider
-import com.example.ktor_chat_app.core.utility.clientId
+import com.example.ktor_chat_app.core.utility.credentials
 import com.example.ktor_chat_app.core.utility.dateFormat
 import com.example.ktor_chat_app.screen_chat.domain.use_case.modify_chat_use_case.ModifyChatUseCases
 import com.example.ktor_chat_app.screen_chat.domain.use_case.retrieve_chat_use_case.RetrieveChatUseCases
@@ -138,7 +138,7 @@ class ChatViewModel @Inject constructor(
 
     private fun myId(){
         viewModelScope.launch {
-            myId=dataStore.clientId()
+            myId=dataStore.credentials()[0]
         }
     }
 
