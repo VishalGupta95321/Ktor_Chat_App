@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.App.Starting"  parent="Theme.SplashScreen">
+
+        <item name="windowSplashScreenBackground">#F0F4F4</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/login_screen_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.Ktor_Chat_App</item>
+
+    </style>
+
+</resources>

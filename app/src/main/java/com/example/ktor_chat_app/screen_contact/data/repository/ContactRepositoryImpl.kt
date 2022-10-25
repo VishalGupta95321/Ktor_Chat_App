@@ -31,19 +31,3 @@ class ContactRepositoryImpl @Inject constructor(
     }
 
 }
-
-//   override suspend fun getActiveContactIds():Flow<List<String>>{
-//       return database.getAllCurrentUser()
-//   }
-//
-//   override suspend fun getContactByID(id:String):Flow<UserEntity>{
-//        return database.getUserWithId(id)
-//    }
-//
-//   override suspend fun getAllContacts(): Flow<List<UserEntity>> {
-//        return database.getAllUser()
-//    }
-//
-//   override suspend fun addContactToDatabase(contact:UserEntity){
-//        return database.addUser(contact)
-//    }

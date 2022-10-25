@@ -1,6 +1,5 @@
 package com.example.ktor_chat_app.core.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ktor_chat_app.core.utility.DispatcherProvider
@@ -30,16 +29,15 @@ class MainViewModel @Inject constructor(
     private var contactsUpdateJob: Job? = null
     private var chatUpdateJob: Job? = null
 
-     private
+     //private
      fun observeBaseModels() {
         viewModelScope.launch(dispatchers.io) {
             webSocketUseCases.observeBaseModel().collect{ baseModel ->
-                Log.d("kkkk","got base"
-                )
+
                 when (baseModel) {
 
                     is ChatMessage -> {
-                        Log.d("goot","got message")
+
                         chatUpdateJob?.join()
                         chatUpdateJob = viewModelScope.launch(dispatchers.io) {
                             insDelChatUseCases.insertChat(
@@ -61,7 +59,6 @@ class MainViewModel @Inject constructor(
                     }
 
                     is MessageSeen -> {
-                        Log.d("goot","got seen")
                         chatUpdateJob?.join()
                         chatUpdateJob = viewModelScope.launch(dispatchers.io) {
                             insDelChatUseCases.messageSeenUpdate(
@@ -71,7 +68,6 @@ class MainViewModel @Inject constructor(
                     }
 
                     is MessageDelivered -> {
-                        Log.d("goot","got deloivered")
                             chatUpdateJob?.join()
                             chatUpdateJob = viewModelScope.launch(dispatchers.io) {
                                 insDelChatUseCases.messageDeliveredUpdate(
@@ -117,8 +113,8 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    init {
-        observeConnectionEvent()
-        observeBaseModels()
-   }
+//    init {
+//        observeConnectionEvent()
+//        observeBaseModels()
+//   }
 }

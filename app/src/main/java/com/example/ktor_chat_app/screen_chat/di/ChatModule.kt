@@ -28,7 +28,7 @@ object ChatModule {
         api: ChatApi,
         database: ChatDao
     ): ChatRepository {
-        return ChatRepositoryImpl(database,api)
+        return ChatRepositoryImpl(database)
     }
 
     @Singleton

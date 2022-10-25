@@ -2,7 +2,6 @@ package com.example.ktor_chat_app.core.presentation
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -13,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.example.ktor_chat_app.core.presentation.components.Navigation
 import com.example.ktor_chat_app.core.presentation.components.Screens
@@ -26,21 +26,25 @@ import kotlinx.coroutines.runBlocking
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    private lateinit var destination : Screens
+
+    private val viewModel : MainViewModel by viewModels()
+    private var clientId : String? = null
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel : MainViewModel by viewModels()
         viewModel.observeConnectionEvent()
+        viewModel.observeBaseModels()
 
-        var destination : Screens
-
-        var clientId : String? = null
-
-        runBlocking {
-            clientId = dataStore.credentials()[0]
-            Log.d("kkk",clientId.toString())
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                runBlocking {
+                    clientId = dataStore.credentials()[0].toString()
+                }
+                false
+            }
         }
 
         setContent {
@@ -54,7 +58,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    destination = if (!clientId.isNullOrEmpty()) {
+                    destination = if (clientId?.isNotEmpty() == true) {
                         Screens.HomeContactScreen
                     } else {
                         Screens.GenerateOtpScreen
@@ -68,20 +72,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-/*
-
-TODO - Suggestion
-    1) multiple scarlet instances of web socket with multiple websocket routes
-           and have to put in each feature/screen in separate data directory.
-    2) multiple RETROFIT instances of HTTP api with multiple  routes
-
-    source - phillip lackner social network twitch repo
-
-    TODO
-        and have to put in each feature/screen in separate data directory.
-        3) fix navigation
-        4) splash screen
-        5) change .copy to .update
-        6) not necessary now but if want - g = fix navigation that using multiple nav graph
- */

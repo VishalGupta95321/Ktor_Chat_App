@@ -50,7 +50,11 @@ android {
 
 dependencies {
 
+
     implementation "com.google.accompanist:accompanist-permissions:0.24.9-beta"
+
+    // SplashScreen
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:30.1.0')
@@ -84,7 +88,6 @@ dependencies {
 
 
     // tinder scarlet webSocket
-    def scarletVersion = '0.1.10'
     implementation "com.tinder.scarlet:scarlet:$scarletVersion"
     implementation "com.tinder.scarlet:websocket-okhttp:$scarletVersion"
     implementation "com.tinder.scarlet:lifecycle-android:$scarletVersion"

@@ -1,5 +1,6 @@
 package com.example.ktor_chat_app.screen_auth.presentation
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +13,8 @@ import com.example.ktor_chat_app.core.utility.Constants.MAX_PHONE_NO_LENGTH
 import com.example.ktor_chat_app.core.utility.dataStore
 import com.example.ktor_chat_app.data.repository.AuthResponse
 import com.example.ktor_chat_app.screen_auth.domain.use_case.AuthUseCases
-import com.example.ktor_chat_app.screen_auth.domain.use_case.InvalidRequestException
+import com.example.ktor_chat_app.web_socket.data.remote.request.CreateUser
+import com.example.ktor_chat_app.web_socket.data.remote.request.InvalidRequestException
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
@@ -90,14 +92,16 @@ class AuthViewModel @Inject constructor(
                 viewModelScope.launch {
                     try {
                         authUseCases.generateOrResendOtp(
-                            name = _name.value.text,
-                            id = _contact.value.text,
+                            CreateUser(
+                                name = _name.value.text,
+                                contactNo = _contact.value.text
+                            ),
                             options =  phoneAuthOptions(
                                 _contact.value.text,
                                 event.activity
                             )
                         )
-                    } catch (e: InvalidRequestException) {
+                    } catch (e : InvalidRequestException) {
                         _eventFlow.emit(
                             UiEvent.OnError(
                                 message = e.message ?: "Something went wrong"
@@ -111,8 +115,10 @@ class AuthViewModel @Inject constructor(
                 viewModelScope.launch {
                     try {
                         authUseCases.generateOrResendOtp(
-                            name = _name.value.text,
-                            id = _contact.value.text,
+                            CreateUser(
+                                name = _name.value.text,
+                                contactNo = _contact.value.text
+                            ),
                             options =  phoneAuthOptions(
                                 _contact.value.text,
                                 event.activity
@@ -147,6 +153,12 @@ class AuthViewModel @Inject constructor(
                                     _contact.value.text,
                                     _name.value.text
                                 )
+                               authUseCases.createUserRequest(
+                                   CreateUser(
+                                       name = _name.value.text,
+                                       contactNo = _contact.value.text
+                                   )
+                               )
                            }
                            else -> _eventFlow.emit(UiEvent.OnError("Something went wrong !!"))
                        }
@@ -173,6 +185,7 @@ class AuthViewModel @Inject constructor(
         return value ?: false
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun phoneAuthOptions(phoneNo: String, activity: Activity): PhoneAuthOptions? {
         if (_contact.value.text.length != MAX_PHONE_NO_LENGTH)
             return null

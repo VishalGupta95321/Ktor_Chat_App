@@ -17,6 +17,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ktor_chat_app.R
 import com.example.ktor_chat_app.core.utility.Constants
+import com.example.ktor_chat_app.core.utility.Constants.Chat_STATUS_TYPE_DELIVERED
+import com.example.ktor_chat_app.core.utility.Constants.Chat_STATUS_TYPE_SEEN
+import com.example.ktor_chat_app.core.utility.Constants.Chat_STATUS_TYPE_SENT
 
 @Composable
 fun ChatListItem(
@@ -68,8 +71,8 @@ fun ChatListItem(
             )
             ChatStatus(
                 messageStatus = when{
-                    chat.delivered && chat.messageSeen -> Constants.TYPE_MESSAGE_SEEN
-                    chat.delivered -> Constants.Chat_STATUS_TYPE_DELIVERED
+                    chat.delivered && chat.messageSeen -> Chat_STATUS_TYPE_SEEN
+                    chat.delivered -> Chat_STATUS_TYPE_DELIVERED
                     else -> Constants.Chat_STATUS_TYPE_SENT
                 },
                 messageTime = chat.time,
@@ -95,13 +98,13 @@ fun ChatStatus(
         )
         if (!isIncoming){
             when(messageStatus){
-                Constants.TYPE_MESSAGE_SEEN ->{
+                Chat_STATUS_TYPE_SEEN ->{
                     ChatStatusIcon(icon = ImageVector.vectorResource(id = R.drawable.chat_seen))
                 }
-                Constants.Chat_STATUS_TYPE_DELIVERED ->{
+                Chat_STATUS_TYPE_DELIVERED ->{
                     ChatStatusIcon(icon = ImageVector.vectorResource(id = R.drawable.chat_delivered))
                 }
-                Constants.Chat_STATUS_TYPE_SENT ->{
+                Chat_STATUS_TYPE_SENT ->{
                     ChatStatusIcon(icon = ImageVector.vectorResource(id = R.drawable.chat_sent))
                 }
             }

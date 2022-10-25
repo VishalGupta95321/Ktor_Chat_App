@@ -8,18 +8,25 @@ import androidx.datastore.preferences.core.edit
 import com.example.ktor_chat_app.core.utility.credentials
 import com.example.ktor_chat_app.core.utility.saveCredentials
 import com.example.ktor_chat_app.screen_auth.domain.repository.AuthRepository
+import com.example.ktor_chat_app.web_socket.data.remote.req_and_res.BaseModel
+import com.example.ktor_chat_app.web_socket.data.remote.webScoketApi.ChatApi
 import com.google.firebase.auth.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
+    private val api : ChatApi,
     private val datastore:DataStore<Preferences>,
     private val auth: FirebaseAuth,
 ) : AuthRepository {
 
     override fun generateOrResendOtp(options: PhoneAuthOptions) {
         PhoneAuthProvider.verifyPhoneNumber(options)
+    }
+
+    override suspend fun createUserRequest(request: BaseModel) {
+        api.sendBaseModel(request)
     }
 
     override suspend fun firebaseSignIn(credential: PhoneAuthCredential) = flow {

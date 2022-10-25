@@ -5,15 +5,12 @@ object Constants {
     const val MAX_PHONE_NO_LENGTH = 13
     const val MAX_NAME_LENGTH = 15
     const val INDIA_TELECOM_PREFIX = "+91"
-    const val TAG = "main"
     const val HOME_APP_BAR_TITLE = "Welcome !!"
     const val ADD_CONTACT_APP_BAR_TITLE = "Select Contacts"
 
     const val Chat_STATUS_TYPE_DELIVERED = "Chat_STATUS_TYPE_DELIVERED"
     const val Chat_STATUS_TYPE_SEEN = "Chat_STATUS_TYPE_SEEN"
     const val Chat_STATUS_TYPE_SENT = "Chat_STATUS_TYPE_SENT"
-
-    const val CLIENT_ID = "Client_Id"
 
     const val TABLE_NAME  = "CHAT_LIST"
     const val TABLE_NAME2  = "USER_LIST"

@@ -6,4 +6,5 @@ data class AuthUseCases(
     val saveCredentialsToDatastore : SaveCredentialsToDatastore,
     val otpVerification : OtpVerification,
     val generateOrResendOtp: GenerateOrResendOtp,
+    val createUserRequest: CreateUserRequest
 )
