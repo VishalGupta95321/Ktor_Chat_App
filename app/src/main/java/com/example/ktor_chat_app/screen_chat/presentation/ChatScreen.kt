@@ -28,7 +28,7 @@ fun ChatScreen(
     Scaffold(
         topBar = {
             ChatScreenTopAppBar(
-                contactProfilePic = painterResource(id = R.drawable.otp_verification),
+                contactProfilePic = painterResource(id = R.drawable.user_logo),
                 contactName = contactData.name,
                 contactOnlineStatus = contactData.onlineStatus,
             )

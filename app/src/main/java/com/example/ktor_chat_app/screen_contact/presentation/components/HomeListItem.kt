@@ -35,7 +35,7 @@ fun HomeListItem(
     ) {
         Spacer(modifier = Modifier.width(10.dp))
         Image(
-            painter = painterResource(id = R.drawable.otp_verification),
+            painter = painterResource(id = R.drawable.user_logo),
             contentDescription = "contact_profile_image",
             modifier = Modifier
                 .clip(CircleShape)
