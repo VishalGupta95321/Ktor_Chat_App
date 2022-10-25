@@ -4,9 +4,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ktor_chat_app.core.utility.DispatcherProvider
 import com.example.ktor_chat_app.data.local.entity.asDomainModel
 import com.example.ktor_chat_app.screen_contact.domain.use_case.ContactUseCases
-import com.example.ktor_chat_app.core.utility.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeContactsViewModel @Inject constructor(
     private val dispatchers: DispatcherProvider,
-    private val contactsUseCases: ContactUseCases
+    private val contactsUseCases: ContactUseCases,
 ) :ViewModel()
 {
     private val _contactsList = mutableStateOf(listOf(ActiveContactState()))

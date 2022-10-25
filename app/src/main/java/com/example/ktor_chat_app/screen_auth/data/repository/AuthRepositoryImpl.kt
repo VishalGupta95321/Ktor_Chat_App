@@ -62,8 +62,10 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun isUserAuthenticated() : Boolean {
         if (datastore.credentials().isEmpty()){
+            println("empty")
            return false
         }
+        println("not empty")
            return true
     }
 

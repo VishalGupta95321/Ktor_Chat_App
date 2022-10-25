@@ -29,22 +29,20 @@ class MainActivity : ComponentActivity() {
     private lateinit var destination : Screens
 
     private val viewModel : MainViewModel by viewModels()
-    private var clientId : String? = null
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override  fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewModel.observeConnectionEvent()
         viewModel.observeBaseModels()
 
-        installSplashScreen().apply {
-            setKeepOnScreenCondition {
-                runBlocking {
-                    clientId = dataStore.credentials()[0].toString()
-                }
-                false
-            }
+        installSplashScreen()
+
+        runBlocking {
+            destination = if(dataStore.credentials()[0].isNotBlank()){
+                Screens.HomeContactScreen
+            } else Screens.GenerateOtpScreen
         }
 
         setContent {
@@ -58,11 +56,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    destination = if (clientId?.isNotEmpty() == true) {
-                        Screens.HomeContactScreen
-                    } else {
-                        Screens.GenerateOtpScreen
-                    }
                     Navigation(
                         navController = navController ,
                         startDestination = destination

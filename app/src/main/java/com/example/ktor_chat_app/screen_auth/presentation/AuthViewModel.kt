@@ -149,16 +149,20 @@ class AuthViewModel @Inject constructor(
                            }
                            is AuthResponse.Success -> {
                                _eventFlow.emit(UiEvent.LoginSuccessful)
-                                authUseCases.saveCredentialsToDatastore(
-                                    _contact.value.text,
-                                    _name.value.text
-                                )
-                               authUseCases.createUserRequest(
-                                   CreateUser(
-                                       name = _name.value.text,
-                                       contactNo = _contact.value.text
+                                viewModelScope.launch{
+                                    authUseCases.createUserRequest(
+                                        CreateUser(
+                                            name = _name.value.text,
+                                            contactNo = _contact.value.text
+                                        )
+                                    )
+                                }
+                               viewModelScope.launch {
+                                   authUseCases.saveCredentialsToDatastore(
+                                       _contact.value.text,
+                                       _name.value.text
                                    )
-                               )
+                               }
                            }
                            else -> _eventFlow.emit(UiEvent.OnError("Something went wrong !!"))
                        }

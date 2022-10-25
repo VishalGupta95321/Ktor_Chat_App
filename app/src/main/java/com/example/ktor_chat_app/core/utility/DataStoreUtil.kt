@@ -13,13 +13,13 @@ val Context.dataStore by preferencesDataStore("settings")
 private val clientIdKey = stringPreferencesKey("clientId")
 private val userNameKey = stringPreferencesKey("userName")
 
-suspend fun DataStore<Preferences>.credentials(): List<String?> {
+suspend fun DataStore<Preferences>.credentials(): List<String> {
 
     val preferences = data.first()
     val clientIdExists = preferences[clientIdKey] != null
     return if(clientIdExists) {
-        listOf(preferences[clientIdKey],preferences[userNameKey])
-    } else listOf("","")
+        listOf(preferences[clientIdKey]!!,preferences[userNameKey]!!)
+    } else listOf(" "," ")
 }
 
 suspend fun DataStore<Preferences>.saveCredentials(

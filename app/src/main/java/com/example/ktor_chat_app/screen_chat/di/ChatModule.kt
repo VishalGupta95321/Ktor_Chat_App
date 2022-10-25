@@ -42,7 +42,7 @@ object ChatModule {
 
     @Singleton
     @Provides
-    fun provideUpdInsDelChatUseCases(
+    fun provideModifyChatUseCases(
         repository: ChatRepository,
         datastore: DataStore<Preferences>
     ): ModifyChatUseCases {
